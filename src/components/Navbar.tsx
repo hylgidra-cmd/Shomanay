@@ -72,6 +72,11 @@ export const Navbar: React.FC = () => {
             <span className="text-amber-300 font-semibold">{t.districtName} Hákimligi</span>
             <span className="opacity-40">·</span>
             <span className="text-cyan-300 font-mono">FERGA 2.0</span>
+            <span className="opacity-40">·</span>
+            <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-800/60 px-2.5 py-0.5 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse" />
+              <span>Baza: Ulandı (Prisma + SQLite)</span>
+            </span>
           </div>
 
           <div className="hidden md:flex items-center gap-4">

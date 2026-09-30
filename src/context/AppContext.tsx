@@ -46,6 +46,9 @@ interface AppContextType {
   indicators: SectorIndicator[];
   auditLogs: AuditLogItem[];
 
+  // Database status
+  isBackendConnected: boolean;
+
   // Selected Object Passport Modal
   selectedPassportObject: DistrictObject | null;
   openObjectPassport: (obj: DistrictObject | string) => void;
@@ -64,6 +67,8 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>('qq');
   const [currentRole, setCurrentRole] = useState<UserRole>('hokim');
@@ -80,8 +85,39 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const [selectedPassportObject, setSelectedPassportObject] = useState<DistrictObject | null>(null);
 
-  // Load from localStorage on mount if available
+  const [isBackendConnected, setIsBackendConnected] = useState<boolean>(false);
+
+  // Load from Express backend API on mount with fallback
   useEffect(() => {
+    async function loadDataFromApi() {
+      try {
+        const [tasksRes, issuesRes, objectsRes, mfysRes] = await Promise.all([
+          fetch(`${API_BASE}/tasks`).then((r) => (r.ok ? r.json() : null)),
+          fetch(`${API_BASE}/issues`).then((r) => (r.ok ? r.json() : null)),
+          fetch(`${API_BASE}/objects`).then((r) => (r.ok ? r.json() : null)),
+          fetch(`${API_BASE}/mfys`).then((r) => (r.ok ? r.json() : null)),
+        ]);
+
+        if (tasksRes && Array.isArray(tasksRes) && tasksRes.length > 0) {
+          setTasks(tasksRes);
+          setIsBackendConnected(true);
+        }
+        if (issuesRes && Array.isArray(issuesRes) && issuesRes.length > 0) {
+          setIssues(issuesRes);
+        }
+        if (objectsRes && Array.isArray(objectsRes) && objectsRes.length > 0) {
+          setObjects(objectsRes);
+        }
+        if (mfysRes && Array.isArray(mfysRes) && mfysRes.length > 0) {
+          setMfys(mfysRes);
+        }
+      } catch (err) {
+        console.warn('Backend API connection fallback:', err);
+      }
+    }
+
+    loadDataFromApi();
+
     try {
       const savedLang = localStorage.getItem('shm_lang') as Language;
       if (savedLang && ['qq', 'uz', 'ru'].includes(savedLang)) {
@@ -93,10 +129,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         const matched = mockUsers.find((u) => u.role === savedRole);
         if (matched) setCurrentUser(matched);
       }
-      const savedTasks = localStorage.getItem('shm_tasks');
-      if (savedTasks) setTasks(JSON.parse(savedTasks));
-      const savedIssues = localStorage.getItem('shm_issues');
-      if (savedIssues) setIssues(JSON.parse(savedIssues));
       const savedAudit = localStorage.getItem('shm_audit');
       if (savedAudit) setAuditLogs(JSON.parse(savedAudit));
     } catch {
@@ -182,6 +214,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       } catch {}
       return updated;
     });
+
+    // Persist to Database API
+    fetch(`${API_BASE}/issues`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newIssue),
+    }).catch((err) => console.error('API createIssue error:', err));
+
     logAuditAction(
       'Jańa mashqala tirkeldi',
       'issue',
@@ -213,6 +253,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return updated;
     });
 
+    // Persist to Database API
+    fetch(`${API_BASE}/tasks`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newTask),
+    }).catch((err) => console.error('API createTask error:', err));
+
     // Update related issue if any
     if (taskData.issueId) {
       setIssues((prev) =>
@@ -240,6 +287,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       } catch {}
       return updated;
     });
+
+    // Persist to Database API
+    fetch(`${API_BASE}/tasks/${taskId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'in_progress' }),
+    }).catch((err) => console.error('API startTask error:', err));
+
     logAuditAction(
       'Tapsırma orınlawǵa kirisildi',
       'task',
@@ -268,6 +323,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       } catch {}
       return updated;
     });
+
+    // Persist to Database API
+    fetch(`${API_BASE}/tasks/${taskId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'under_review', evidence }),
+    }).catch((err) => console.error('API submitEvidence error:', err));
 
     logAuditAction(
       'Dálil hám esabat tapsırıldı (Tekseriwde)',
@@ -320,6 +382,22 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         return updated;
       });
 
+      // Persist to Database API
+      fetch(`${API_BASE}/tasks/${taskId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'accepted',
+          completedDate: new Date().toISOString().split('T')[0],
+          review: {
+            reviewedAt: new Date().toISOString(),
+            reviewedBy: `${currentUser.name} (${currentUser.title})`,
+            accepted: true,
+            inspectorNotes: notes || 'Dáliller tastıyıqlandı, qabıl etildi.',
+          },
+        }),
+      }).catch((err) => console.error('API reviewTask accepted error:', err));
+
       // Also resolve issue if connected
       if (task.issueId) {
         setIssues((prev) =>
@@ -358,6 +436,21 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         } catch {}
         return updated;
       });
+
+      // Persist to Database API
+      fetch(`${API_BASE}/tasks/${taskId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'returned_for_revision',
+          review: {
+            reviewedAt: new Date().toISOString(),
+            reviewedBy: `${currentUser.name} (${currentUser.title})`,
+            accepted: false,
+            rejectionReason: notes || 'Kemshilikler kórsetildi',
+          },
+        }),
+      }).catch((err) => console.error('API reviewTask rejected error:', err));
 
       logAuditAction(
         'Tapsırma qayta islewge qaytarıldı (Revision)',
@@ -401,6 +494,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       } catch {}
       return updated;
     });
+
+    // Persist to Database API
+    fetch(`${API_BASE}/tasks/${taskId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        deadline: newDeadline,
+        isOverdue: false,
+        extensions: [...task.extensions, extensionItem],
+      }),
+    }).catch((err) => console.error('API extendDeadline error:', err));
 
     logAuditAction(
       'Múddet uzaytırıldı',
@@ -460,6 +564,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         industrialZones,
         indicators,
         auditLogs,
+        isBackendConnected,
         selectedPassportObject,
         openObjectPassport,
         closeObjectPassport,
