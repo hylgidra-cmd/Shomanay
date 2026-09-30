@@ -89,11 +89,11 @@ export default function IssuesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2.5">
+          <h1 className="text-2xl sm:text-3xl font-black text-white flex items-center gap-2.5">
             <AlertOctagon className="w-7 h-7 text-red-600" />
             {t.pageIssuesTitle}
           </h1>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
+          <p className="text-slate-400 text-xs sm:text-sm mt-1">
             {t.pageIssuesSubtitle}
           </p>
         </div>
@@ -108,7 +108,7 @@ export default function IssuesPage() {
       </div>
 
       {/* Filters Bar in Crisp White */}
-      <div className="p-5 rounded-3xl bg-white border border-slate-200 shadow-sm flex flex-wrap items-center gap-4">
+      <div className="p-5 rounded-3xl bg-[#081324] border border-blue-900/50 shadow-sm flex flex-wrap items-center gap-4">
         <div className="relative flex-1 min-w-[220px]">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
@@ -116,14 +116,14 @@ export default function IssuesPage() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Mashqala mazmunı yamasa kodi boyınsha izlew..."
-            className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0a3d8f] focus:bg-white"
+            className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:bg-[#081324]"
           />
         </div>
 
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-[#0a3d8f]"
+          className="px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-slate-200 focus:outline-none focus:border-cyan-300"
         >
           <option value="all">Barlıq kategoriyalar</option>
           <option value="electricity">Elektr energiyası</option>
@@ -136,7 +136,7 @@ export default function IssuesPage() {
         <select
           value={priorityFilter}
           onChange={(e) => setPriorityFilter(e.target.value)}
-          className="px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-[#0a3d8f]"
+          className="px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-slate-200 focus:outline-none focus:border-cyan-300"
         >
           <option value="all">Barlıq áhmiyet</option>
           <option value="critical">Kritikalıq</option>
@@ -154,51 +154,51 @@ export default function IssuesPage() {
               key={iss.id}
               className={`p-6 rounded-3xl border transition-all flex flex-col justify-between shadow-sm ${
                 iss.priority === 'critical'
-                  ? 'bg-white border-red-200 hover:border-red-300'
-                  : 'bg-white border-slate-200 hover:border-slate-300'
+                  ? 'bg-[#081324] border-red-800/50 hover:border-red-300'
+                  : 'bg-[#081324] border-blue-900/50 hover:border-slate-300'
               }`}
             >
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200">
+                    <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-[#0b1b33] text-slate-200 border border-blue-900/50">
                       {iss.code}
                     </span>
                     <span
                       className={`text-xs px-2.5 py-0.5 rounded-full font-bold uppercase ${
                         iss.priority === 'critical'
-                          ? 'bg-red-100 text-red-700 border border-red-200'
+                          ? 'bg-red-950/40 text-red-400 border border-red-800/50'
                           : iss.priority === 'high'
-                          ? 'bg-amber-100 text-amber-800 border border-amber-200'
-                          : 'bg-slate-100 text-slate-700'
+                          ? 'bg-amber-950/40 text-amber-400 border border-amber-800/50'
+                          : 'bg-[#0b1b33] text-slate-200'
                       }`}
                     >
                       {iss.priority.toUpperCase()}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500 font-semibold">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
                     {getCategoryIcon(iss.category)}
                     <span className="capitalize">{iss.category}</span>
                   </div>
                 </div>
 
-                <h3 className="text-base font-bold text-slate-900 leading-snug">{iss.title}</h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{iss.description}</p>
+                <h3 className="text-base font-bold text-white leading-snug">{iss.title}</h3>
+                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{iss.description}</p>
 
-                <div className="space-y-2 pt-3 text-xs text-slate-500 border-t border-slate-100">
+                <div className="space-y-2 pt-3 text-xs text-slate-400 border-t border-blue-900/40">
                   <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-1.5 font-medium text-slate-700">
-                      <MapPin className="w-3.5 h-3.5 text-blue-600" />
+                    <span className="flex items-center gap-1.5 font-medium text-slate-200">
+                      <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                       {mfy?.name}
                     </span>
-                    <span>Tirkelgen: <strong className="text-slate-700">{iss.reportedDate}</strong></span>
+                    <span>Tirkelgen: <strong className="text-slate-200">{iss.reportedDate}</strong></span>
                   </div>
 
                   {iss.objectName && (
                     <button
                       onClick={() => openObjectPassport(iss.objectId!)}
-                      className="text-xs text-[#0a3d8f] hover:underline flex items-center gap-1.5 font-bold pt-1"
+                      className="text-xs text-cyan-300 hover:underline flex items-center gap-1.5 font-bold pt-1"
                     >
                       <Building2 className="w-4 h-4" />
                       <span>{iss.objectName} (Pasportti ashıw)</span>
@@ -207,14 +207,14 @@ export default function IssuesPage() {
                 </div>
               </div>
 
-              <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-xs text-slate-500">
-                  Status: <strong className="text-slate-800 capitalize">{iss.status}</strong>
+              <div className="pt-4 mt-5 border-t border-blue-900/40 flex items-center justify-between">
+                <span className="text-xs text-slate-400">
+                  Status: <strong className="text-slate-200 capitalize">{iss.status}</strong>
                 </span>
 
                 <Link
                   href={`/tasks?issueId=${iss.id}`}
-                  className="px-4 py-2 rounded-xl bg-[#0a3d8f] hover:bg-blue-800 text-white text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-cyan-300 hover:bg-blue-800 text-white text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5"
                 >
                   <span>Tapsırma qosıw</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -228,43 +228,43 @@ export default function IssuesPage() {
       {/* Modal: Create Issue in White/Blue */}
       {createModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg p-8 shadow-2xl space-y-5">
-            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <div className="bg-[#081324] border border-blue-900/50 rounded-3xl w-full max-w-lg p-8 shadow-2xl space-y-5">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <PlusCircle className="w-6 h-6 text-red-600" />
               Jańa Mashqala Tirkew (FR-04)
             </h2>
             <form onSubmit={handleCreateIssue} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-700">Mashqala mazmunı</label>
+                <label className="text-xs font-bold text-slate-200">Mashqala mazmunı</label>
                 <input
                   type="text"
                   required
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   placeholder="Mısalı: Podstanciya transformatorı quwatı jetispewshiligi"
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#0a3d8f]"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white focus:bg-[#081324] focus:border-cyan-300"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700">Tolıq túsindirme</label>
+                <label className="text-xs font-bold text-slate-200">Tolıq túsindirme</label>
                 <textarea
                   rows={3}
                   required
                   value={newDesc}
                   onChange={(e) => setNewDesc(e.target.value)}
                   placeholder="Sebepleri, oqıbatı hám qáwip dárıjasi..."
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#0a3d8f]"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white focus:bg-[#081324] focus:border-cyan-300"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Kategoriya</label>
+                  <label className="text-xs font-bold text-slate-200">Kategoriya</label>
                   <select
                     value={newCategory}
                     onChange={(e) => setNewCategory(e.target.value as IssueCategory)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   >
                     <option value="electricity">Elektr támiynatı</option>
                     <option value="gas">Gaz támiynatı</option>
@@ -275,11 +275,11 @@ export default function IssuesPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Áhmiyetliligi</label>
+                  <label className="text-xs font-bold text-slate-200">Áhmiyetliligi</label>
                   <select
                     value={newPriority}
                     onChange={(e) => setNewPriority(e.target.value as IssuePriority)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   >
                     <option value="critical">Kritikalıq</option>
                     <option value="high">Bálent</option>
@@ -290,11 +290,11 @@ export default function IssuesPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Baylanıslı Obyekt</label>
+                  <label className="text-xs font-bold text-slate-200">Baylanıslı Obyekt</label>
                   <select
                     value={newObjectId}
                     onChange={(e) => setNewObjectId(e.target.value)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   >
                     <option value="">Obyekt joq</option>
                     {objects.map((o) => (
@@ -306,11 +306,11 @@ export default function IssuesPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700">MPJ Aymaǵı</label>
+                  <label className="text-xs font-bold text-slate-200">MPJ Aymaǵı</label>
                   <select
                     value={newMfyId}
                     onChange={(e) => setNewMfyId(e.target.value)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   >
                     {mfys.map((m) => (
                       <option key={m.id} value={m.id}>
@@ -321,11 +321,11 @@ export default function IssuesPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-blue-900/40">
                 <button
                   type="button"
                   onClick={() => setCreateModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900"
+                  className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white"
                 >
                   Biykar etiw
                 </button>

@@ -252,32 +252,32 @@ export const ExecutiveCabinet: React.FC = () => {
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                   <div className="space-y-2 flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-white text-slate-700 border border-slate-200 shadow-2xs">
+                      <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-md bg-[#071324] text-cyan-300 border border-blue-800/50 shadow-2xs">
                         {iss.code}
                       </span>
                       <span
                         className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase ${
                           iss.priority === 'critical'
-                            ? 'bg-red-100 text-red-700 border border-red-200'
+                            ? 'bg-red-950 text-red-400 border border-red-800/50'
                             : iss.priority === 'high'
-                            ? 'bg-amber-100 text-amber-800'
-                            : 'bg-slate-200 text-slate-700'
+                            ? 'bg-amber-950 text-amber-400 border border-amber-800/50'
+                            : 'bg-slate-800 text-slate-300'
                         }`}
                       >
                         {iss.priority}
                       </span>
-                      <span className="text-xs text-slate-500">Kategoriya: <strong className="text-slate-700 capitalize">{iss.category}</strong></span>
+                      <span className="text-xs text-slate-400">Kategoriya: <strong className="text-slate-200 capitalize">{iss.category}</strong></span>
                     </div>
 
-                    <h3 className="text-sm font-bold text-slate-900">{iss.title}</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{iss.description}</p>
+                    <h3 className="text-sm font-bold text-white">{iss.title}</h3>
+                    <p className="text-xs text-slate-300 leading-relaxed">{iss.description}</p>
 
                     {iss.objectName && (
                       <button
                         onClick={() => openObjectPassport(iss.objectId!)}
-                        className="text-xs text-[#0a3d8f] hover:underline pt-1 flex items-center gap-1.5 font-semibold"
+                        className="text-xs text-cyan-400 hover:underline pt-1 flex items-center gap-1.5 font-semibold"
                       >
-                        <Building2 className="w-4 h-4 text-blue-600" />
+                        <Building2 className="w-4 h-4 text-cyan-400" />
                         <span>{iss.objectName} (Pasportti kóriw)</span>
                       </button>
                     )}

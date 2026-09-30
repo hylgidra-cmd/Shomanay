@@ -164,22 +164,22 @@ export default function TasksPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 flex items-center gap-2.5">
-              <CheckSquare className="w-7 h-7 text-[#0a3d8f]" />
+            <h1 className="text-2xl sm:text-3xl font-black text-white flex items-center gap-2.5">
+              <CheckSquare className="w-7 h-7 text-cyan-300" />
               {t.pageTasksTitle}
             </h1>
-            <span className="text-xs px-3 py-1 rounded-full bg-blue-100 text-[#0a3d8f] font-bold border border-blue-200">
+            <span className="text-xs px-3 py-1 rounded-full bg-blue-950 text-cyan-300 font-bold border border-blue-800/50">
               {tasks.length} {t.tabAllTasks}
             </span>
           </div>
-          <p className="text-slate-500 text-xs sm:text-sm mt-1">
+          <p className="text-slate-400 text-xs sm:text-sm mt-1">
             {t.pageTasksSubtitle}
           </p>
         </div>
 
         <button
           onClick={() => setCreateModalOpen(true)}
-          className="px-5 py-3 rounded-2xl bg-[#0a3d8f] hover:bg-blue-800 text-white text-xs font-bold shadow-md shadow-blue-900/10 transition-all flex items-center gap-2 self-start sm:self-auto"
+          className="px-5 py-3 rounded-2xl bg-cyan-300 hover:bg-blue-800 text-white text-xs font-bold shadow-md shadow-blue-900/10 transition-all flex items-center gap-2 self-start sm:self-auto"
         >
           <PlusCircle className="w-4 h-4" />
           <span>{t.btnCreateTask}</span>
@@ -187,7 +187,7 @@ export default function TasksPage() {
       </div>
 
       {/* Filters bar in Crisp White */}
-      <div className="p-5 rounded-3xl bg-white border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+      <div className="p-5 rounded-3xl bg-[#081324] border border-blue-900/50 shadow-sm flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-3 flex-1 min-w-[280px]">
           {/* Search */}
           <div className="relative flex-1 min-w-[220px]">
@@ -197,7 +197,7 @@ export default function TasksPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t.searchTaskPlaceholder}
-              className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0a3d8f] focus:bg-white transition-all"
+              className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-300 focus:bg-[#081324] transition-all"
             />
           </div>
 
@@ -205,7 +205,7 @@ export default function TasksPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-[#0a3d8f]"
+            className="px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-slate-200 focus:outline-none focus:border-cyan-300"
           >
             <option value="all">Barlıq statuslar</option>
             <option value="assigned">Tapsırıldı (Assigned)</option>
@@ -219,7 +219,7 @@ export default function TasksPage() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-[#0a3d8f]"
+            className="px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-slate-200 focus:outline-none focus:border-cyan-300"
           >
             <option value="all">Barlıq áhmiyet</option>
             <option value="critical">Kritikalıq</option>
@@ -244,7 +244,7 @@ export default function TasksPage() {
       {/* Tasks Cards List */}
       <div className="space-y-4">
         {filteredTasks.length === 0 ? (
-          <div className="p-12 text-center rounded-3xl bg-white border border-slate-200 text-slate-500 text-sm">
+          <div className="p-12 text-center rounded-3xl bg-[#081324] border border-blue-900/50 text-slate-400 text-sm">
             Tapsırma tabılmadı.
           </div>
         ) : (
@@ -255,36 +255,36 @@ export default function TasksPage() {
                 key={tsk.id}
                 className={`p-6 rounded-3xl border transition-all ${
                   isOverdue
-                    ? 'bg-white border-red-300 shadow-md'
+                    ? 'bg-[#081324] border-red-300 shadow-md'
                     : tsk.status === 'under_review'
-                    ? 'bg-white border-amber-300 shadow-md'
+                    ? 'bg-[#081324] border-amber-300 shadow-md'
                     : tsk.status === 'accepted'
-                    ? 'bg-white border-emerald-200 shadow-sm'
-                    : 'bg-white border-slate-200 hover:border-slate-300 shadow-sm'
+                    ? 'bg-[#081324] border-emerald-800/50 shadow-sm'
+                    : 'bg-[#081324] border-blue-900/50 hover:border-slate-300 shadow-sm'
                 }`}
               >
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
                   <div className="space-y-2.5 flex-1">
                     <div className="flex flex-wrap items-center gap-2.5">
-                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-md bg-slate-100 text-slate-800 border border-slate-200">
+                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-md bg-[#0b1b33] text-slate-200 border border-blue-900/50">
                         {tsk.code}
                       </span>
                       <span
                         className={`text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider ${
                           tsk.status === 'accepted'
-                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                            ? 'bg-emerald-950/40 text-emerald-400 border border-emerald-800/50'
                             : tsk.status === 'under_review'
-                            ? 'bg-amber-100 text-amber-800 border border-amber-200'
+                            ? 'bg-amber-950/40 text-amber-400 border border-amber-800/50'
                             : tsk.status === 'returned_for_revision'
-                            ? 'bg-red-100 text-red-700 border border-red-200'
-                            : 'bg-blue-100 text-[#0a3d8f] border border-blue-200'
+                            ? 'bg-red-950/40 text-red-400 border border-red-800/50'
+                            : 'bg-blue-950 text-cyan-300 border border-blue-800/50'
                         }`}
                       >
                         {tsk.status}
                       </span>
 
                       {isOverdue && (
-                        <span className="text-xs px-3 py-1 rounded-full bg-red-100 text-red-700 font-bold border border-red-200 animate-pulse flex items-center gap-1.5">
+                        <span className="text-xs px-3 py-1 rounded-full bg-red-950/40 text-red-400 font-bold border border-red-800/50 animate-pulse flex items-center gap-1.5">
                           <AlertTriangle className="w-3.5 h-3.5" />
                           MÚDDETI ÓTKEN (Asia/Tashkent)
                         </span>
@@ -293,32 +293,32 @@ export default function TasksPage() {
                       <span
                         className={`text-[11px] px-2.5 py-0.5 rounded-full font-bold ${
                           tsk.priority === 'critical'
-                            ? 'bg-red-50 text-red-700 border border-red-200'
+                            ? 'bg-red-950/40 text-red-400 border border-red-800/50'
                             : tsk.priority === 'high'
-                            ? 'bg-amber-50 text-amber-800 border border-amber-200'
-                            : 'bg-slate-100 text-slate-700'
+                            ? 'bg-amber-950/40 text-amber-400 border border-amber-800/50'
+                            : 'bg-[#0b1b33] text-slate-200'
                         }`}
                       >
                         {tsk.priority.toUpperCase()}
                       </span>
                     </div>
 
-                    <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">{tsk.title}</h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{tsk.actionDescription}</p>
+                    <h3 className="text-base sm:text-lg font-bold text-white leading-snug">{tsk.title}</h3>
+                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{tsk.actionDescription}</p>
 
                     {/* Metadata line */}
-                    <div className="flex flex-wrap items-center gap-5 text-xs text-slate-500 pt-1">
+                    <div className="flex flex-wrap items-center gap-5 text-xs text-slate-400 pt-1">
                       <div className="flex items-center gap-1.5">
-                        <User className="w-4 h-4 text-[#0a3d8f]" />
-                        <span>Orynlawshı: <strong className="text-slate-800">{tsk.mainExecutorOrg}</strong></span>
+                        <User className="w-4 h-4 text-cyan-300" />
+                        <span>Orynlawshı: <strong className="text-slate-200">{tsk.mainExecutorOrg}</strong></span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <ShieldCheck className="w-4 h-4 text-purple-600" />
-                        <span>Tekseriwshi: <strong className="text-slate-800">{tsk.inspectorOrg}</strong></span>
+                        <span>Tekseriwshi: <strong className="text-slate-200">{tsk.inspectorOrg}</strong></span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <Calendar className="w-4 h-4 text-slate-400" />
-                        <span>Múddet: <strong className={isOverdue ? 'text-red-600 font-bold' : 'text-slate-800'}>
+                        <span>Múddet: <strong className={isOverdue ? 'text-red-600 font-bold' : 'text-slate-200'}>
                           {new Date(tsk.deadline).toLocaleDateString()} {new Date(tsk.deadline).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </strong></span>
                       </div>
@@ -326,7 +326,7 @@ export default function TasksPage() {
                       {tsk.objectName && (
                         <button
                           onClick={() => openObjectPassport(tsk.objectId!)}
-                          className="flex items-center gap-1.5 text-[#0a3d8f] hover:underline font-semibold"
+                          className="flex items-center gap-1.5 text-cyan-300 hover:underline font-semibold"
                         >
                           <Building2 className="w-4 h-4" />
                           <span>{tsk.objectName}</span>
@@ -336,15 +336,15 @@ export default function TasksPage() {
 
                     {/* Evidence & Review Notes preview */}
                     {tsk.evidence && (
-                      <div className="mt-3 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+                      <div className="mt-3 p-4 rounded-2xl bg-[#0b1b33] border border-blue-900/50 flex flex-wrap items-center justify-between gap-3 text-xs">
                         <div className="space-y-1">
-                          <div className="text-slate-800 font-bold flex items-center gap-2">
+                          <div className="text-slate-200 font-bold flex items-center gap-2">
                             <Upload className="w-4 h-4 text-emerald-600" />
                             Dálil tapsırılǵan: {tsk.evidence.comment}
                           </div>
                           {tsk.evidence.numericResult !== undefined && (
-                            <div className="text-slate-600">
-                              Faktik nátiyje: <strong className="text-slate-900">{tsk.evidence.numericResult} {tsk.evidence.unit}</strong>
+                            <div className="text-slate-300">
+                              Faktik nátiyje: <strong className="text-white">{tsk.evidence.numericResult} {tsk.evidence.unit}</strong>
                             </div>
                           )}
                         </div>
@@ -354,9 +354,9 @@ export default function TasksPage() {
                             <img
                               src={tsk.evidence.photos[0]}
                               alt="Dalil"
-                              className="w-14 h-11 rounded-xl object-cover border border-slate-200 shadow-xs"
+                              className="w-14 h-11 rounded-xl object-cover border border-blue-900/50 shadow-xs"
                             />
-                            <span className="text-[11px] text-slate-500 font-medium">({tsk.evidence.documents[0]?.name || 'Hújjet'})</span>
+                            <span className="text-[11px] text-slate-400 font-medium">({tsk.evidence.documents[0]?.name || 'Hújjet'})</span>
                           </div>
                         )}
                       </div>
@@ -364,7 +364,7 @@ export default function TasksPage() {
 
                     {tsk.review && (
                       <div className={`p-3.5 rounded-2xl text-xs border ${
-                        tsk.review.accepted ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-red-50 border-red-200 text-red-900'
+                        tsk.review.accepted ? 'bg-emerald-950/40 border-emerald-800/50 text-emerald-400' : 'bg-red-950/40 border-red-800/50 text-red-400'
                       }`}>
                         <strong>Tekseriwshi xulosasi ({tsk.review.reviewedBy}):</strong> {tsk.review.inspectorNotes || tsk.review.rejectionReason}
                       </div>
@@ -372,11 +372,11 @@ export default function TasksPage() {
                   </div>
 
                   {/* Actions Column in State Blue */}
-                  <div className="flex flex-wrap lg:flex-col items-center lg:items-end gap-2.5 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-slate-100">
+                  <div className="flex flex-wrap lg:flex-col items-center lg:items-end gap-2.5 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-blue-900/40">
                     {tsk.status === 'assigned' && (
                       <button
                         onClick={() => startTask(tsk.id)}
-                        className="px-4 py-2 rounded-xl bg-[#0a3d8f] hover:bg-blue-800 text-white text-xs font-bold shadow-sm transition-colors"
+                        className="px-4 py-2 rounded-xl bg-cyan-300 hover:bg-blue-800 text-white text-xs font-bold shadow-sm transition-colors"
                       >
                         Jumıstı baslaw (In Progress)
                       </button>
@@ -408,7 +408,7 @@ export default function TasksPage() {
                     {tsk.status !== 'accepted' && (
                       <button
                         onClick={() => setExtendModalTask(tsk)}
-                        className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-200 transition-colors"
+                        className="px-4 py-2 rounded-xl bg-[#0b1b33] hover:bg-slate-800/60 text-slate-200 text-xs font-semibold border border-blue-900/50 transition-colors"
                       >
                         Múddetti uzaytıw
                       </button>
@@ -424,43 +424,43 @@ export default function TasksPage() {
       {/* Modal: Create Task */}
       {createModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-xl p-8 shadow-2xl space-y-5">
-            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-              <PlusCircle className="w-6 h-6 text-[#0a3d8f]" />
+          <div className="bg-[#081324] border border-blue-900/50 rounded-3xl w-full max-w-xl p-8 shadow-2xl space-y-5">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <PlusCircle className="w-6 h-6 text-cyan-300" />
               Jańa Tapsırma Belgilew (FR-05)
             </h2>
             <form onSubmit={handleCreateTask} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-700">Tapsırma mazmunı / Atı</label>
+                <label className="text-xs font-bold text-slate-200">Tapsırma mazmunı / Atı</label>
                 <input
                   type="text"
                   required
                   value={newTaskTitle}
                   onChange={(e) => setNewTaskTitle(e.target.value)}
                   placeholder="Mısalı: Diyxanabad issıqxanasına jańa gaz liniyasın tartıw"
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#0a3d8f]"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white focus:bg-[#081324] focus:border-cyan-300"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700">Anıq háreket túsindirmesi</label>
+                <label className="text-xs font-bold text-slate-200">Anıq háreket túsindirmesi</label>
                 <textarea
                   rows={2}
                   required
                   value={newTaskDesc}
                   onChange={(e) => setNewTaskDesc(e.target.value)}
                   placeholder="Kerekli texnika, materiallar hám orınlaw boyınsha talaplar..."
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white focus:border-[#0a3d8f]"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white focus:bg-[#081324] focus:border-cyan-300"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Tiykarǵı Orynlawshı Shólkem</label>
+                  <label className="text-xs font-bold text-slate-200">Tiykarǵı Orynlawshı Shólkem</label>
                   <select
                     value={newTaskExecutor}
                     onChange={(e) => setNewTaskExecutor(e.target.value)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   >
                     <option value="Rayon Elektr Tarmaqları Kárxanası">Rayon Elektr Tarmaqları Kárxanası</option>
                     <option value="«Hududgaz Qaraqalpaqstan» Gaz Támiynatı">«Hududgaz» Gaz Támiynatı</option>
@@ -471,11 +471,11 @@ export default function TasksPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Ǵárezsiz Tekseriwshi</label>
+                  <label className="text-xs font-bold text-slate-200">Ǵárezsiz Tekseriwshi</label>
                   <select
                     value={newTaskInspector}
                     onChange={(e) => setNewTaskInspector(e.target.value)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   >
                     <option value="Ǵárezsiz Tekseriw & Monitorinq Inspeksiyası">Ǵárezsiz Tekseriw Inspeksiyası</option>
                     <option value="Shomanay rayonı hákimligi">Shomanay Hákimligi (Koordinator)</option>
@@ -485,22 +485,22 @@ export default function TasksPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Múddet (Asia/Tashkent)</label>
+                  <label className="text-xs font-bold text-slate-200">Múddet (Asia/Tashkent)</label>
                   <input
                     type="datetime-local"
                     required
                     value={newTaskDeadline}
                     onChange={(e) => setNewTaskDeadline(e.target.value)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Baylanıslı Obyekt</label>
+                  <label className="text-xs font-bold text-slate-200">Baylanıslı Obyekt</label>
                   <select
                     value={newTaskObjectId}
                     onChange={(e) => setNewTaskObjectId(e.target.value)}
-                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-3.5 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   >
                     <option value="">Obyekt biriktirilmesin</option>
                     {objects.map((o) => (
@@ -512,17 +512,17 @@ export default function TasksPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-blue-900/40">
                 <button
                   type="button"
                   onClick={() => setCreateModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900"
+                  className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white"
                 >
                   Biykar etiw
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 text-xs font-bold text-white bg-[#0a3d8f] hover:bg-blue-800 rounded-xl shadow-sm"
+                  className="px-5 py-2.5 text-xs font-bold text-white bg-cyan-300 hover:bg-blue-800 rounded-xl shadow-sm"
                 >
                   Tapsırma qosıw
                 </button>
@@ -535,77 +535,77 @@ export default function TasksPage() {
       {/* Modal: Submit Evidence */}
       {evidenceModalTask && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg p-8 shadow-2xl space-y-5">
-            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <div className="bg-[#081324] border border-blue-900/50 rounded-3xl w-full max-w-lg p-8 shadow-2xl space-y-5">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <Upload className="w-6 h-6 text-amber-600" />
               Orınlanǵanlıq Dálilin Tapsırıw (FR-07)
             </h2>
-            <p className="text-xs text-slate-500">
-              Tapsırma: <strong className="text-slate-800">{evidenceModalTask.title}</strong>
+            <p className="text-xs text-slate-400">
+              Tapsırma: <strong className="text-slate-200">{evidenceModalTask.title}</strong>
             </p>
 
             <form onSubmit={handleSubmitEvidence} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-700">Orınlaw esabatı / Izoh</label>
+                <label className="text-xs font-bold text-slate-200">Orınlaw esabatı / Izoh</label>
                 <textarea
                   rows={2}
                   required
                   value={evidenceComment}
                   onChange={(e) => setEvidenceComment(e.target.value)}
                   placeholder="Qanday jumıslar pitkerildi, qashan sınaqtan ótti..."
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white focus:bg-[#081324]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Sanlıq nátiyje (fakt)</label>
+                  <label className="text-xs font-bold text-slate-200">Sanlıq nátiyje (fakt)</label>
                   <input
                     type="number"
                     step="any"
                     value={evidenceNumeric}
                     onChange={(e) => setEvidenceNumeric(e.target.value)}
                     placeholder="Mısalı: 2.2"
-                    className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-700">Ólshem birligi</label>
+                  <label className="text-xs font-bold text-slate-200">Ólshem birligi</label>
                   <input
                     type="text"
                     value={evidenceUnit}
                     onChange={(e) => setEvidenceUnit(e.target.value)}
                     placeholder="atm, MWt, km..."
-                    className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                    className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700">Foto dálil (URL)</label>
+                <label className="text-xs font-bold text-slate-200">Foto dálil (URL)</label>
                 <input
                   type="text"
                   value={evidencePhotoUrl}
                   onChange={(e) => setEvidencePhotoUrl(e.target.value)}
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 font-mono text-[11px]"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white font-mono text-[11px]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700">Dalalatnama / Akt hújjeti (PDF)</label>
+                <label className="text-xs font-bold text-slate-200">Dalalatnama / Akt hújjeti (PDF)</label>
                 <input
                   type="text"
                   value={evidenceDocName}
                   onChange={(e) => setEvidenceDocName(e.target.value)}
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                 />
               </div>
 
-              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-blue-900/40">
                 <button
                   type="button"
                   onClick={() => setEvidenceModalTask(null)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900"
+                  className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white"
                 >
                   Biykar etiw
                 </button>
@@ -624,28 +624,28 @@ export default function TasksPage() {
       {/* Modal: Review & Accept Task */}
       {reviewModalTask && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg p-8 shadow-2xl space-y-5">
-            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+          <div className="bg-[#081324] border border-blue-900/50 rounded-3xl w-full max-w-lg p-8 shadow-2xl space-y-5">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
               <ShieldCheck className="w-6 h-6 text-emerald-600" />
               Ǵárezsiz Tekseriw & Qabıllaw (FR-05, FR-07)
             </h2>
-            <p className="text-xs text-slate-600">
-              Tapsırma: <strong className="text-slate-900">{reviewModalTask.title}</strong>
+            <p className="text-xs text-slate-300">
+              Tapsırma: <strong className="text-white">{reviewModalTask.title}</strong>
             </p>
 
             {reviewAlert && (
-              <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-start gap-2.5">
+              <div className="p-4 rounded-2xl bg-red-950/40 border border-red-800/50 text-red-400 text-xs flex items-start gap-2.5">
                 <AlertTriangle className="w-4 h-4 shrink-0 text-red-600 mt-0.5" />
                 <div>{reviewAlert}</div>
               </div>
             )}
 
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-1.5">
-              <div className="text-slate-600">
-                Házirgi avtorizaciyadan ótken paydalanıwshı: <strong className="text-slate-900">{currentUser.name}</strong> ({currentUser.title})
+            <div className="p-4 rounded-2xl bg-[#0b1b33] border border-blue-900/50 text-xs space-y-1.5">
+              <div className="text-slate-300">
+                Házirgi avtorizaciyadan ótken paydalanıwshı: <strong className="text-white">{currentUser.name}</strong> ({currentUser.title})
               </div>
-              <div className="text-slate-600">
-                Talap etiletuǵın tekseriwshi: <strong className="text-slate-900">{reviewModalTask.inspectorOrg}</strong>
+              <div className="text-slate-300">
+                Talap etiletuǵın tekseriwshi: <strong className="text-white">{reviewModalTask.inspectorOrg}</strong>
               </div>
               {currentUser.role === 'organization' && (
                 <div className="text-red-600 font-bold pt-1">
@@ -656,21 +656,21 @@ export default function TasksPage() {
             </div>
 
             <div>
-              <label className="text-xs font-bold text-slate-700">Tekseriwshi xulosasi / Eskertpeler</label>
+              <label className="text-xs font-bold text-slate-200">Tekseriwshi xulosasi / Eskertpeler</label>
               <textarea
                 rows={3}
                 value={reviewNotes}
                 onChange={(e) => setReviewNotes(e.target.value)}
                 placeholder="Dálil boyınsha dálalatnama tekserildi, obyekttegi gaz/elektr parametrleri sáykes..."
-                className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:bg-white"
+                className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white focus:bg-[#081324]"
               />
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+            <div className="flex items-center justify-between pt-3 border-t border-blue-900/40">
               <button
                 type="button"
                 onClick={() => setReviewModalTask(null)}
-                className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900"
+                className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white"
               >
                 Jabıw
               </button>
@@ -678,7 +678,7 @@ export default function TasksPage() {
                 <button
                   type="button"
                   onClick={() => handleReviewAction(false)}
-                  className="px-4 py-2.5 text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl"
+                  className="px-4 py-2.5 text-xs font-bold text-red-400 bg-red-950/40 hover:bg-red-100 border border-red-800/50 rounded-xl"
                 >
                   Qayta islewge qaytarıw
                 </button>
@@ -698,50 +698,50 @@ export default function TasksPage() {
       {/* Modal: Extend Deadline */}
       {extendModalTask && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in">
-          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-md p-8 shadow-2xl space-y-5">
-            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-              <Clock className="w-6 h-6 text-[#0a3d8f]" />
+          <div className="bg-[#081324] border border-blue-900/50 rounded-3xl w-full max-w-md p-8 shadow-2xl space-y-5">
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <Clock className="w-6 h-6 text-cyan-300" />
               Múddetti Uzaytıw (FR-06)
             </h2>
-            <p className="text-xs text-slate-600">
-              Aldınǵı múddet: <strong className="text-slate-900">{new Date(extendModalTask.deadline).toLocaleDateString()}</strong>
+            <p className="text-xs text-slate-300">
+              Aldınǵı múddet: <strong className="text-white">{new Date(extendModalTask.deadline).toLocaleDateString()}</strong>
             </p>
 
             <form onSubmit={handleExtendDeadline} className="space-y-4">
               <div>
-                <label className="text-xs font-bold text-slate-700">Jańa múddet</label>
+                <label className="text-xs font-bold text-slate-200">Jańa múddet</label>
                 <input
                   type="datetime-local"
                   required
                   value={newDeadlineDate}
                   onChange={(e) => setNewDeadlineDate(e.target.value)}
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-700">Uzaytıw sebebi (Auditke jazıladı)</label>
+                <label className="text-xs font-bold text-slate-200">Uzaytıw sebebi (Auditke jazıladı)</label>
                 <textarea
                   rows={2}
                   required
                   value={extendReason}
                   onChange={(e) => setExtendReason(e.target.value)}
                   placeholder="Kabel materialları jetkerip beriliwi keshikkenligi sebepli..."
-                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-900"
+                  className="w-full mt-1 px-4 py-2.5 text-xs rounded-xl bg-[#0b1b33] border border-blue-900/50 text-white"
                 />
               </div>
 
-              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end space-x-3 pt-3 border-t border-blue-900/40">
                 <button
                   type="button"
                   onClick={() => setExtendModalTask(null)}
-                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900"
+                  className="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white"
                 >
                   Biykar etiw
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 text-xs font-bold text-white bg-[#0a3d8f] hover:bg-blue-800 rounded-xl"
+                  className="px-5 py-2.5 text-xs font-bold text-white bg-cyan-300 hover:bg-blue-800 rounded-xl"
                 >
                   Múddetti saqlaw
                 </button>

@@ -189,10 +189,10 @@ export const Navbar: React.FC = () => {
               </button>
 
               {roleMenuOpen && (
-                <div className="absolute right-0 mt-2 w-80 p-2.5 rounded-2xl bg-white border border-slate-200 shadow-2xl z-50">
-                  <div className="px-3 py-2 border-b border-slate-100 mb-1.5">
-                    <div className="text-xs font-bold text-slate-900">Xızmetker Roli (RBAC)</div>
-                    <div className="text-[11px] text-slate-500">
+                <div className="absolute right-0 mt-2 w-80 p-2.5 rounded-2xl bg-[#09152a] border border-blue-900/60 shadow-2xl z-50">
+                  <div className="px-3 py-2 border-b border-blue-900/40 mb-1.5">
+                    <div className="text-xs font-bold text-white">Xızmetker Roli (RBAC)</div>
+                    <div className="text-[11px] text-slate-400">
                       Ruxsatlar hám tekseriw qaǵıydaların sinap kóriń
                     </div>
                   </div>
@@ -207,14 +207,14 @@ export const Navbar: React.FC = () => {
                         }}
                         className={`w-full text-left p-2.5 rounded-xl text-xs transition-colors flex items-start space-x-2.5 ${
                           currentUser.role === r.role
-                            ? 'bg-blue-50 text-[#0a3d8f] font-bold border border-blue-200'
-                            : 'text-slate-700 hover:bg-slate-50'
+                            ? 'bg-blue-950 text-cyan-300 font-bold border border-blue-800/60'
+                            : 'text-slate-300 hover:bg-slate-800/60'
                         }`}
                       >
-                        <User className="w-4 h-4 mt-0.5 text-blue-600" />
+                        <User className="w-4 h-4 mt-0.5 text-cyan-400" />
                         <div>
                           <div className="font-semibold">{r.label}</div>
-                          <div className="text-[11px] text-slate-500">{r.desc}</div>
+                          <div className="text-[11px] text-slate-400">{r.desc}</div>
                         </div>
                       </button>
                     ))}
@@ -264,7 +264,7 @@ export const Navbar: React.FC = () => {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200"
+              className="xl:hidden p-1.5 rounded-lg bg-slate-800 text-slate-200 hover:bg-slate-700"
             >
               {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
@@ -274,7 +274,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="xl:hidden p-4 border-b border-slate-200 bg-white shadow-xl space-y-1">
+        <div className="xl:hidden p-4 border-b border-blue-900/60 bg-[#09152a] shadow-xl space-y-1">
           {navLinks.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -284,7 +284,7 @@ export const Navbar: React.FC = () => {
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold ${
-                  isActive ? 'bg-[#0a3d8f] text-white' : 'text-slate-700 hover:bg-slate-100'
+                  isActive ? 'bg-[#0a3d8f] text-white' : 'text-slate-300 hover:bg-slate-800/60 hover:text-white'
                 }`}
               >
                 <div className="flex items-center space-x-3">
